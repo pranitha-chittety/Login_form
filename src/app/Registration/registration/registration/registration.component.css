@@ -1,0 +1,11 @@
+.input{
+    width:70%;
+    padding: 12px 0 0 26px;
+}
+.card{
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  height: 70%;  
+  background-image: url(/src/backdrop.jpg)
+}

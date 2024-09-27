@@ -1,0 +1,40 @@
+.input {
+  width: 70%;
+  padding: 12px 0 0 26px;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  margin-top: 22px;
+  height: 80%;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+.line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #666;
+  margin:0 12px 0 12px
+}
+
+.or {
+  padding: 0 10px;
+  color: #666;
+}
+.social-login button {
+  width: 50%;
+  margin: 10px 0 0 56px;
+  padding: 10px;
+  background-color: #4285F4; /* Blue for Google */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

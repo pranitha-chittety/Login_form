@@ -13,8 +13,8 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="input">
             <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide() ? 'password' : 'text'" />
-            <button mat-icon-button matSuffix formControlName="password" (click)="clickEvent($event)"
+            <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password"/>
+            <button mat-icon-button matSuffix  (click)="clickEvent($event)"
                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
                 <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
@@ -23,8 +23,8 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="input">
             <mat-label>Confirm password</mat-label>
-            <input matInput [type]="hide() ? 'confirmPassword' : 'text'" />
-            <button mat-icon-button matSuffix formControlName="confirmPassword" (click)="clickEvent($event)"
+            <input matInput [type]="hide() ? 'confirmPassword' : 'text'" formControlName="confirmPassword"/>
+            <button mat-icon-button matSuffix  (click)="clickEvent($event)"
                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
                 <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>

@@ -10,7 +10,8 @@ import { RouterOutlet } from '@angular/router';
     RouterOutlet,
     CommonModule, 
     ReactiveFormsModule,
-    FormsModule],
+    FormsModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

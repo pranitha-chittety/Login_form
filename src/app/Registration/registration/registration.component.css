@@ -7,5 +7,6 @@
   justify-content: center; /* Center horizontally */
   align-items: center;     /* Center vertically */
   height: 70%;  
-  background-image: url(/src/backdrop.jpg)
+  background-image: url(../../../assets/backdrop.jpg);
+  /* background: url(../../../assets/backdrop.jpg) no-repeat center center fixed; */
 }

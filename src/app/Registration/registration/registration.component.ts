@@ -1,8 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
-import {MatCardModule} from '@angular/material/card';
 
 
 @Component({
@@ -14,7 +12,7 @@ import {MatCardModule} from '@angular/material/card';
 export class RegistrationComponent {
   constructor(private router: Router) {}
 
-  RegistrationForm: FormGroup<any> = new FormGroup({
+  RegistrationForm: any = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required])
   })

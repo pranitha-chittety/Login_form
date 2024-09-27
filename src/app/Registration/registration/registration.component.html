@@ -10,19 +10,17 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="input">
             <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide() ? 'password' : 'text'" />
-            <button mat-icon-button matSuffix formControlName="password" (click)="clickEvent($event)"
+            <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
+            <button mat-icon-button matSuffix (click)="clickEvent($event)"
                 [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide()">
                 <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
         </mat-form-field>
         <button mat-button style="margin-left: 44%;width:fit-content;margin-top:-14px;">Forget Password?</button>
-        <button mat-flat-button formControlName="SignUp"
+        <button mat-flat-button
             style="background-color: dodgerblue; width:70%;margin: 26px 0 0 32px ;" (click)="login()">Log
             In</button>
 
         <mat-label style="margin:2px 0 0 38px;">Don't have an account?<button mat-button (click)="signup()" style="text-decoration: underline;">Sign Up</button></mat-label>
-
     </mat-card>
-
 </form>

@@ -7,7 +7,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatIconModule} from '@angular/material/icon';
-import { RegistrationComponent } from './registration/registration/registration.component';
+import { RegistrationComponent } from './registration/registration.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { LoginComponent } from './login/login.component';
 import {MatCardModule} from '@angular/material/card';

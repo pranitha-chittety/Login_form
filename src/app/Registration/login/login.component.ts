@@ -15,7 +15,7 @@ export class LoginComponent {
   // constructor(private router: Router) {},
 
   signUpForm:FormGroup;
-
+  submitted = false;
   // signUpForm: FormGroup<any> = new FormGroup({
   //   FullName: new FormControl('', [Validators.required,Validators.minLength(3)]),
   //   email: new FormControl('',[Validators.required,Validators.email]),
@@ -27,7 +27,9 @@ export class LoginComponent {
     this.signUpForm = this.fb.group({
       FullName: new FormControl('', [Validators.required,Validators.minLength(3)]),
       email: new FormControl('',[Validators.required,Validators.email]),
-      password: new FormControl('',[Validators.required,Validators.minLength(8)]),
+      password: new FormControl('',[Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
       confirmPassword: new FormControl('',[Validators.required])
     }, { 
       validators: this.passwordMatchValidator // Add custom validator here
@@ -41,6 +43,7 @@ export class LoginComponent {
     event.stopPropagation();
   }
   
+  get f() { return this.signUpForm.controls; }
 
   passwordMatchValidator(form: FormGroup) {
     const password = form.get(['password'])?.value;
@@ -48,7 +51,32 @@ export class LoginComponent {
     return password === confirmPassword ? null : { mismatch: true };
   }
   Create(){
+    this.submitted = true;
 
+    // Stop if the form is invalid
+    if (this.signUpForm.invalid) {
+      return;
+    }
+
+    // Handle form submission (authentication)
+    const fullName = this.signUpForm.value.FullName;
+    const email = this.signUpForm.value.email;
+    const password = this.signUpForm.value.password;
+    const confirmpwd =this.signUpForm.value.confirmPassword;
+
+    console.log(`fullName:${fullName}, Email: ${email}, Password: ${password},confirmpwd: ${confirmpwd}`);
+
+    // Mock login validation (replace with real authentication logic)
+    if (fullName === 'john' && email === 'test@example.com' && password === 'password123' && password == confirmpwd) {
+      alert('Login successful!');
+      // Redirect or perform any action on successful login
+    } else if(email === 'test@example.com' && password != confirmpwd){
+     this.errorMessage = 'please enter correct password'
+    } 
+    else {
+      this.errorMessage = 'Invalid email or password';
+    }
+    this.signUpForm.reset()
   }
   updateErrorMessage() {
     if (this.signUpForm.value.email.hasError('required')) {
@@ -59,10 +87,7 @@ export class LoginComponent {
       this.errorMessage.set('');
     }
   }
-  get f() {
-    console.log(this.signUpForm.controls)
-    return this.signUpForm.controls;
-  }
+
   signInWithGoogle(): void {
     // this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }

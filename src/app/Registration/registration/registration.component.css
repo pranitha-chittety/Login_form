@@ -1,12 +1,61 @@
 .input{
     width:70%;
     padding: 12px 0 0 26px;
+    height: max-content;
 }
 .card{
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center;     /* Center vertically */
-  height: 70%;  
-  background-image: url(../../../assets/backdrop.jpg);
+  height: 100vh;
+  overflow: hidden;
   /* background: url(../../../assets/backdrop.jpg) no-repeat center center fixed; */
+}
+.left-half, .right-half {
+  flex: 1; /* Equal width for both halves */
+  display: flex;
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+  margin-left: 20px;
+}
+
+.left-half {
+  height: 100vh;
+
+}
+
+.right-half {
+  background-color: #e0e0e0; /* Example background color */
+}
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.line {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #666;
+  width:18vh;
+  margin-left :4px
+}
+
+.or {
+  padding: 0 10px;
+  color: #666;
+}
+.social-login button {
+  width: 50%;
+  margin: 10px 0 0 90px;
+  padding: 10px;
+  background-color: #4285F4; /* Blue for Google */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.invalid-feedback {
+  color: red;
+  margin-top: -16px;
 }

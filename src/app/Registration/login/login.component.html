@@ -9,19 +9,19 @@
         <mat-form-field appearance="outline" class="input">
             <mat-label>Email</mat-label>
             <input matInput type="email" placeholder="pat@example.com" formControlName="email"
-                required />
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required />
         </mat-form-field>
-        <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
             <div *ngIf="f.email.errors?.required">Email is required</div>
             <div *ngIf="f.email.errors?.email">Email must be a valid email address</div>
-        </div> -->
+        </div>
         <mat-form-field appearance="outline" class="input">
             <mat-label>Enter your password</mat-label>
-            <input matInput [type]="hide() ? 'password' : 'text'" formControlName="password" />
-            <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide()">
-                <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" />
+            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>&nbsp;
+            
         </mat-form-field>
         <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors?.required">Password is required</div>
@@ -33,13 +33,13 @@
         </div> -->
         <mat-form-field appearance="outline" class="input">
             <mat-label>Confirm password</mat-label>
-            <input matInput [type]="hide() ? 'confirmPassword' : 'text'" formControlName="confirmPassword" />
-            <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide()">
-                <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" />
+            <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
+                <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-
+            <mat-hint *ngIf="!passwordMatchValidator() && signUpForm.get('confirmPassword')?.value?.length" style="color: red;">Password mismatched</mat-hint>
         </mat-form-field>
+        <!-- <div *ngIf="errorMessage = true">Passwords do NOT match!</div> -->
         <!-- <div *ngIf="submitted && f.confirmPassword?.errors" class="invalid-feedback">
             <div *ngIf="f.confirmPassword?.errors?.required">Confirm password is required</div>
             <div *ngIf="f.confirmPassword?.errors?.['minlength']">Confirm password must be at least 6 characters</div>
@@ -64,4 +64,6 @@
     <div class="right-half">
         <img src="assets/workplace-background.jpg" style="border: rounded;width:100%;height: 100vh;">
     </div>
+   
+    <app-profile></app-profile>
 </form>

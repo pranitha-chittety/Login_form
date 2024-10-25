@@ -61,6 +61,11 @@ export class RegistrationComponent {
     } else {
       this.errorMessage = 'Invalid email or password';
     }
+    if(this.submitted = true){
+      this.router.navigate(['/profile'])
+    } else{
+      this.errorMessage = 'Invalid email or password'
+    }
   }
    
   

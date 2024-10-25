@@ -25,7 +25,7 @@
             <div *ngIf="f.password.errors?.required">Password is required</div>
             <div *ngIf="f.password.errors?.['minlength']">Password must be at least 8 characters</div>
         </div>
-        <button mat-button style="margin-left: 56%;width:fit-content;margin-top:-50px;">Forgot Password?</button>
+        <mat-hint style="margin-left: 56%;width:fit-content;margin-top:-50px;"><button mat-button >Forgot Password?</button></mat-hint>
         <button mat-flat-button style="background-color: dodgerblue; width:70%;margin: 26px 0 0 32px ;"
             (click)="login()">Log
             In</button>

@@ -11,6 +11,9 @@ import { RegistrationComponent } from './registration/registration.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { LoginComponent } from './login/login.component';
 import {MatCardModule} from '@angular/material/card';
+import { ProfileComponent } from './profile/profile.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RegistrationService } from './registration.service';
 
 
 
@@ -18,7 +21,8 @@ import {MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +35,9 @@ import {MatCardModule} from '@angular/material/card';
     FlexLayoutModule,
     MatIconModule,
     MatDividerModule,
-    MatCardModule
+    MatCardModule,
+    //RegistrationService,
+    HttpClientModule
   ]
 })
 export class RegistrationModule { }

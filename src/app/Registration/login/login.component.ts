@@ -1,8 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal ,Input} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RegistrationService } from '../registration.service';
 
 @Component({
   selector: 'app-login',
@@ -13,44 +14,37 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   // constructor(private router: Router) {},
+  constructor(private router: Router,private RegistrationService: RegistrationService) {}
+    
+    signUpForm: any = new FormGroup({
+      FullName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [Validators.required,
+        Validators.minLength(8),Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
+        confirmPassword: new FormControl('', [Validators.required,
+          //   Validators.minLength(8),
+            Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)])
+    })
 
-  signUpForm:FormGroup;
   submitted = false;
-  // signUpForm: FormGroup<any> = new FormGroup({
-  //   FullName: new FormControl('', [Validators.required,Validators.minLength(3)]),
-  //   email: new FormControl('',[Validators.required,Validators.email]),
-  //   password: new FormControl('',[Validators.required,Validators.minLength(8)]),
-  //   confirmPassword: new FormControl('',[Validators.required])
-  // })
-
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.signUpForm = this.fb.group({
-      FullName: new FormControl('', [Validators.required,Validators.minLength(3)]),
-      email: new FormControl('',[Validators.required,Validators.email]),
-      password: new FormControl('',[Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
-      confirmPassword: new FormControl('',[Validators.required])
-    }, { 
-      validators: this.passwordMatchValidator // Add custom validator here
-    });
-  }
-  
-  hide = signal(true);
+  hidePassword = true;
+  hideConfirmPassword = true;
   errorMessage: any;
-  clickEvent(event: MouseEvent) {
-    this.hide.set(!this.hide());
-    event.stopPropagation();
-  }
-  
+  // hide = signal(true);
+  // errorMessage: any;
+  // clickEvent(event: MouseEvent) {
+  //   this.hide.set(!this.hide());
+  //   event.stopPropagation();
+  // }
+
   get f() { return this.signUpForm.controls; }
 
-  passwordMatchValidator(form: FormGroup) {
-    const password = form.get(['password'])?.value;
-    const confirmPassword = form.get(['confirmPassword'])?.value;
-    return password === confirmPassword ? null : { mismatch: true };
+  passwordMatchValidator() {
+    const password = this.signUpForm.get(['password'])?.value;
+    const confirmPassword = this.signUpForm.get(['confirmPassword'])?.value;
+    return password === confirmPassword;
   }
-  Create(){
+  Create() {
     this.submitted = true;
 
     // Stop if the form is invalid
@@ -62,21 +56,37 @@ export class LoginComponent {
     const fullName = this.signUpForm.value.FullName;
     const email = this.signUpForm.value.email;
     const password = this.signUpForm.value.password;
-    const confirmpwd =this.signUpForm.value.confirmPassword;
-
+    const confirmpwd = this.signUpForm.value.confirmPassword;
+    if (password === confirmpwd) {
+      alert('Login successful!')
+    } else {
+      this.errorMessage = 'true'
+    }
+      this.RegistrationService.ProfileData(fullName)
     console.log(`fullName:${fullName}, Email: ${email}, Password: ${password},confirmpwd: ${confirmpwd}`);
 
-    // Mock login validation (replace with real authentication logic)
-    if (fullName === 'john' && email === 'test@example.com' && password === 'password123' && password == confirmpwd) {
-      alert('Login successful!');
-      // Redirect or perform any action on successful login
-    } else if(email === 'test@example.com' && password != confirmpwd){
-     this.errorMessage = 'please enter correct password'
-    } 
-    else {
-      this.errorMessage = 'Invalid email or password';
+
+    if (this.submitted = true) {
+      console.log("signup successful")
+      this.router.navigate(['/profile'])
     }
+
+
+    // Mock login validation (replace with real authentication logic)
+    // if (email === 'test@example.com' && password === 'password123' && password == confirmpwd) {
+    //   alert('Login successful!');
+    //   // this.router.navigate(['/profile'])
+    //   // Redirect or perform any action on successful login
+    // } else if(email === 'test@example.com' && password != confirmpwd){
+    //  this.errorMessage = 'please enter correct password'
+    // } 
+    // else {
+    //   this.errorMessage = 'Invalid email or password';
+    // }
     this.signUpForm.reset()
+    // if(this.submitted = true){
+    //   this.router.navigate(['/profile'])
+    // } 
   }
   updateErrorMessage() {
     if (this.signUpForm.value.email.hasError('required')) {
@@ -88,16 +98,17 @@ export class LoginComponent {
     }
   }
 
-  signInWithGoogle(): void {
+  signInWithGoogle(){
     // this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
-  signInWithFB(): void {
+  signInWithFB() {
     // this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
-  login(){
+  login() {
     this.router.navigate(['']);
   }
 
 
-  }
+}
+
 
